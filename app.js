@@ -19,11 +19,14 @@ const UserRoutes = require("./routes/userRoute");
 // authotication middlewar
 const authMiddleware = require("./middleware/authMiddleware");
 
-//do connection
+// connection
 const dbConnection = require("./db/dbConfig");
 
-//do questions middleware
+// questions middleware
 const questionsRoutes = require("./routes/questionRoute");
+
+// answer middleware
+const answerRoutes = require("./routes/answerRoute");
 
 //json middleware to extract json
 app.use(express.json());
@@ -35,6 +38,9 @@ app.use("/api/users", UserRoutes);
 app.use("/api/questions", authMiddleware, questionsRoutes);
 
 //answer routes middleware
+app.use("/api/answer", authMiddleware, answerRoutes);
+
+//////////////////////////////////
 async function start() {
   try {
     const result = await dbConnection.execute("select'test' ");
