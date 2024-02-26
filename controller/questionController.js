@@ -9,9 +9,9 @@ async function askQuestion(req, res) {
 
   const userid = req.user.userid;
 
-  console.log(userid + " ---user id");
+  // console.log(userid + " ---user id");
 
-  console.log(questionid + " ---question");
+  // console.log(questionid + " ---question");
 
   if (!title || !description) {
     return res

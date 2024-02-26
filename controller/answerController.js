@@ -30,4 +30,21 @@ async function postAnswer(req, res) {
   }
 }
 
-module.exports = { postAnswer };
+// All answers
+async function all_answers(req, res) {
+  const questionId = req.params.questionid;
+  try {
+    const [answers] = await dbConnection.query(
+      "SELECT * FROM answers WHERE questionId = ?",
+      [questionId]
+    );
+    return res.status(StatusCodes.OK).json({ answers });
+  } catch (error) {
+    console.error(error.message);
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ msg: "Something went wrong, please try again later" });
+  }
+}
+
+module.exports = { postAnswer, all_answers };
